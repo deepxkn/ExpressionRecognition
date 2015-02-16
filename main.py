@@ -11,8 +11,15 @@
       //
 '''
 from FaceDetection import *
+from HistogramNormalization import *
 
-a = FaceDetector("test1.jpg")
-a.detect_faces()
-a.no_of_faces()
-a.show_visualization()
+
+image = "test1.jpg"
+histogram_normalizer = HistogramNormalizer(image)
+lighted_image = histogram_normalizer.normalize_image()
+#a.histogram_visualization()
+im = FaceDetector(image)
+faces = im.detect_faces(lighted_image)
+#print faces
+#im.no_of_faces()
+#im.show_visualization()

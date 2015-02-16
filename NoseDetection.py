@@ -1,10 +1,5 @@
 '''
-       // * Detects faces (0<=f<=10) in an image and returns them in the form of a list of lists.
-	  * Lists are of the form [x,y,w,h] where 
-	  * x is the x coordinate of the top-left corner of the image
-	  * y is the y coordinate of the top-left corner of the image
-	  * w is the width of the image
-	  * h is the height of the image
+       // * Detects noses given a face
 	  * @author : Abhilasha
 	  * @author : Supriya
 	  * @author : Varshini
@@ -14,7 +9,7 @@
 import cv2
 import sys
 
-class FaceDetector:
+class NoseDetector:
 	def __init__(self,imagePath="",cascPath = "haarcascade_frontalface_alt.xml"):
 		'''Accepts the image to recognise faces in'''
 		self.imagePath = imagePath
