@@ -1,16 +1,15 @@
 '''
-       // * Detects noses given a face
+       /* * Detects eyes given a face
 	  * @author : Abhilasha
 	  * @author : Supriya
-	  * @author : Varshini
-      //
+	  * @author : Varshini/
 '''
 
 import cv2
 import sys
 
-class NoseDetector:
-	def __init__(self,face,imagePath="",cascPath = "haarcascade_mcs_nose.xml",gray = None):
+class EyeDetector:
+	def __init__(self,face,imagePath="",cascPath = "haarcascade_eye.xml",gray = None):
 		'''Accepts the image to recognise faces in'''
 		self.face = face		#TODO: Clean up this section. If you have face, you do not need x,y,w,h
 		self.x= face[0]
@@ -23,9 +22,9 @@ class NoseDetector:
 		self.gray = gray
 		
 
-	def detect_noses(self):
-		'''Finds the nose in a given face'''
-		noseCascade = cv2.CascadeClassifier(self.cascPath)
+	def detect_eyes(self):
+		'''Finds the eyes in a given face'''
+		eyeCascade = cv2.CascadeClassifier(self.cascPath)
 		if self.isImage:
 			# Read the image
 			image = cv2.imread(self.imagePath)
@@ -37,16 +36,16 @@ class NoseDetector:
 		print self.h
 		print self.gray
 		roi_gray = self.gray[self.y:self.y+self.h, self.x:self.x+self.w]
-		noses = noseCascade.detectMultiScale(roi_gray)
+		eyes = eyeCascade.detectMultiScale(roi_gray)
 		try:
-			if(len(noses) == 1):
-				self.nose = noses
+			if(len(eyes) == 2):
+				self.eyes = eyes
 				print "HERE"
-				print self.nose
-				return self.nose
+				#print self.nose
+				return self.eyes
 			else:
-				print "Too few or too many noses detected"
-			#TODO : Put nose handling logic
+				print "Too few or too many eyes detected"
+			#TODO : Put eye handling logic
 		except:
 			print "Problem detecting nose in face"
 		
@@ -56,7 +55,7 @@ class NoseDetector:
 
 	def get_nose(self):
 		'''Returns nose in a face'''
-		return self.nose
+		return self.eyes
 		
 
 	def set_face(self, face):
@@ -68,7 +67,7 @@ class NoseDetector:
 	def show_visualization(self,imagePath=""):
 		'''Displays the image with a rectangle drawn around each of the faces'''
 		try:
-			if self.nose!= None:
+			if self.eyes!= None:
 				if self.isImage:
 					image = cv2.imread(self.imagePath)
 					roi_face = image[self.y:self.y+self.h,self.x:self.x+self.w]
@@ -79,12 +78,12 @@ class NoseDetector:
 					#print "HERE"
 				cv2.rectangle(image,(self.x,self.y),(self.x+self.w,self.y+self.h),(255,0,0),2)
 				#roi_face = self.gray[self.y:self.y+self.h,self.x:self.x+self.w]
-				#for (ex,ey,ew,eh) in self.nose:
+				for eye in self.eyes:
 
-				cv2.rectangle(roi_face,(self.nose[0][0],self.nose[0][1]),(self.nose[0][0]+self.nose[0][2],self.nose[0][1]+self.nose[0][3]),(0,0,255),2)
+				cv2.rectangle(roi_face,(eye[0],eye[1]),(eye[0]+eye[2],eye[1]+eye[3]),(0,0,255),2)
 				print "VARSHINI AND ABHILASHA 4EVA"
 				print self.face
-				print self.nose
+				print self.eyes
 				cv2.imshow("Faces found", image)
 				cv2.waitKey(0)
 		except Exception as e:

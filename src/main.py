@@ -41,7 +41,7 @@ def find_eye_after_noses(faces_noses):
 	return faces_noses_eyes
 	
 
-image = "test2.jpg"
+image = "../images/test1.jpg"
 '''histogram_normalizer = HistogramNormalizer(image)
 lighted_image = histogram_normalizer.normalize_image()		#Lighted_image is now grayscale, image is in colour
 '''

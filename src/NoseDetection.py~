@@ -10,7 +10,7 @@ import cv2
 import sys
 
 class NoseDetector:
-	def __init__(self,face,imagePath="",cascPath = "haarcascade_mcs_nose.xml",gray = None):
+	def __init__(self,face,imagePath="",cascPath = "/ExpressionRecognition/haarcascades/haarcascade_mcs_nose.xml",gray = None):
 		'''Accepts the image to recognise faces in'''
 		self.face = face		#TODO: Clean up this section. If you have face, you do not need x,y,w,h
 		self.x= face[0]
